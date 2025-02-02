@@ -9,6 +9,7 @@ const TodoList = () => {
   const handleAddTodo = () => {
     if (headingInput.trim() !=="") {
     setTodos([...todos, { heading: headingInput, lists: [] }]);
+    // If the state is list, a list has to be used in the function setTodos, and so is object({}). 
     setHeadingInput('');
   }};
 
