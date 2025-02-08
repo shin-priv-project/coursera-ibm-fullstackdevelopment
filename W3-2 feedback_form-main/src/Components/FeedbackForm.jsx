@@ -50,12 +50,6 @@ const FeedbackForm = () => {
     }
   };
 
-  // // This is the practice exercise part.
-  // const [formData2, setFormData2] = useState({
-  //   name: "",
-  //   e
-  // })
-
   return (
     <>
     <nav>
