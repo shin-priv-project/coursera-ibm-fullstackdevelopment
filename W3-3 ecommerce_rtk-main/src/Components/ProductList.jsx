@@ -31,13 +31,14 @@ const ProductList = () => {
             <span>{product.name} - ${product.price}</span>
             <button
               className={`add-to-cart-btn ${disabledProducts.includes(product.id) ? 'disabled' : ''}`}
-              {/* 
-              ? 'disabled' : '': This is a ternary operator. It works like a concise if-else statement:
-              If disabledProducts.includes(product.id) is true, the class name disabled will be added.
-              If disabledProducts.includes(product.id) is false, an empty string '' will be added, effectively adding no additional class.
-              */}
               onClick={() => handleAddToCart(product)}
-              disabled={disabledProducts.includes(product.id)} > {/* Disable button if product is in disabledProducts */}
+              disabled={disabledProducts.includes(product.id)} > 
+              {/* Disable button if product is in disabledProducts */}
+              {/* 
+                ? 'disabled' : '': This is a ternary operator. It works like a concise if-else statement:
+                If disabledProducts.includes(product.id) is true, the class name disabled will be added.
+                If disabledProducts.includes(product.id) is false, an empty string '' will be added, effectively adding no additional class.
+              */}
               Add to Cart
             </button>
           </li>
