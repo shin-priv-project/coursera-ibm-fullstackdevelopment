@@ -37,11 +37,12 @@ const ShoppingCart = () => {
               <span>{item.quantity}</span>
               <button className="quantity-control-btn" onClick={() => handleIncreaseQuantity(item.id)}>+</button>
             </div>
+            <button className="remove-item-btn" onClick={() => handleRemoveItem(item.id)}>Remove</button>
           </li>
         ))}
       </ul>
       <button className="clear-cart-btn" onClick={handleClearCart}>Clear Cart</button>
-      <div>{totalAbount ? <div>"The total amount is {totalAmount}</div> : ""}</div>
+      <div>{totalAmount ? <div>"The total amount is {totalAmount}</div> : ""}</div>
       {/* Inside the expression, there's a ternary operator for conditional rendering in JSX. */}
     </div>
   

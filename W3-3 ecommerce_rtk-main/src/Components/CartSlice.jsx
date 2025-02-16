@@ -6,6 +6,7 @@ const initialState = {
 
 const CartSlice = createSlice({
     name: 'cart', 
+    // name: A string value representing the name of your slice. It's used internally by Redux Toolkit for action type prefixing and other purposes. "action type prefixing" is a way to namespace your action types and make your Redux actions more organized and easier to manage.
     initialState,
     reducers: {
         addItemToCart(state, action) {
@@ -37,5 +38,5 @@ const CartSlice = createSlice({
     }
 });
 
-export const {addItemToCart, removeItemFromCart, clearCart, increaseItemQuantity, decreaseItemQuantity, } = CartSlice.actions;
+export const { addItemToCart, removeItemFromCart, clearCart, increaseItemQuantity, decreaseItemQuantity, } = CartSlice.actions;
 export default CartSlice.reducer;

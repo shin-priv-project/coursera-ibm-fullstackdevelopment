@@ -32,7 +32,8 @@ const ProductList = () => {
             <button
               className={`add-to-cart-btn ${disabledProducts.includes(product.id) ? 'disabled' : ''}`}
               onClick={() => handleAddToCart(product)}
-              disabled={disabledProducts.includes(product.id)} > 
+              disabled={disabledProducts.includes(product.id)}
+              > 
               {/* Disable button if product is in disabledProducts */}
               {/* 
                 ? 'disabled' : '': This is a ternary operator. It works like a concise if-else statement:
