@@ -251,9 +251,9 @@ function ProductList() {
     e.preventDefault();
     setShowCart(false);
     };
-    const handleAddToCart = (item, index) => {
+    const handleAddToCart = (item) => {
         console.log("The function handleAddToCart was provoked.")
-        dispatch(addItem(item, index));
+        dispatch(addItem(item));
 
         // const updatedAddedToCart = [...addedToCart];
         // updatedAddedToCart[item.name] = true;
@@ -276,7 +276,7 @@ function ProductList() {
             ...prevState,
             [item.name]: true,
         }));
-        console.log(addedToCart);
+        // console.log(addedToCart);
     };
 
     return (
@@ -311,7 +311,7 @@ function ProductList() {
                                 <p>{item.description}</p>
                                 <p>{item.cost}</p>
                                 {/* <form onSubmit={() => handleAddToCart(item)}> */}
-                                    <button className="product-button" onClick={() => handleAddToCart(item, index*ind)}>Add to Cart</button>
+                                    <button className="product-button" onClick={() => handleAddToCart(item)}>Add to Cart</button>
                                 {/* </form> */}
                                 </div>
                         ))}
