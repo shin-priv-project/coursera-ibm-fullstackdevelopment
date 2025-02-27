@@ -7,29 +7,44 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
-  const calculateTotalAmount = () => {
- 
-  };
-
   const handleContinueShopping = (e) => {
    
   };
 
-
+const handleCheckoutSHopping = (e) => {
+  alert("Functionality to be adeed for future reference");
+}
 
   const handleIncrement = (item) => {
+    const name = item.name;
+    const amount = item.quantity + 1;
+    dispatch(updateQuantity(name, amount));
   };
 
   const handleDecrement = (item) => {
-   
+    const name = item.name;
+    const amount = item.quantity - 1;
+    if (amount > 0) {
+      dispatch(updateQuantity(name, amount));
+    } else {
+      dispatch(removeItem(item));
+    };
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item));
+  };
+
+  // Calculate total amount for all products in the cart
+  const calculateTotalAmount = () => {
+    const totalAmount = cart.reduce((total, item) => total + item.cost*item.quantity, 0);
+    return totalAmount;
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    const totalCost = item.cost * item.quantity;
+    return totalCost;
   };
 
   return (
@@ -53,7 +68,7 @@ const CartItem = ({ onContinueShopping }) => {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
+      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'>Total amount: ${calculateTotalAmount()}</div>
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
