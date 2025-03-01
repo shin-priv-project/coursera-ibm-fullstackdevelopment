@@ -28,6 +28,7 @@ export const CartSlice = createSlice({
   name: 'cart',
   initialState: {
     items: [], // Initialize items as an empty array
+    cartToggle: false,
   },
   reducers: {
     addItem: (state, action) => {
@@ -46,20 +47,29 @@ export const CartSlice = createSlice({
     },
     removeItem: (state, action) => {
       console.log("The function removeItem invoked.")
-      state.items.find(content => content.name !== action.payload.name);
+      state.items = state.items.filter(content => content.name !== action.payload.name);
     },
     updateQuantity: (state, action) => {
-      const {name, amount} = action.payload;
-      const existingItem = state.items.find(content => content.name === name);
+      console.log("The function uddateQuantity invoked.")
+      const {plant, amount} = action.payload;
+      console.log(plant, amount);
+      const existingItem = state.items.find(content => content.name === plant);
       if (existingItem) {
         existingItem.quantity = amount;
       } else {
-        console.log(`The item ${name} has not been added to the cart`);
+        console.log(`The item ${plant} is not in the cart`);
       };
-    }
+    },
+    toggleCart: (state, action) => {
+      if (state.cartToggle) {
+        state.cartToggle = false;
+      } else {
+        state.cartToggle = true;
+      };
+    },
   },
 });
 
-export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity, toggleCart } = CartSlice.actions;
 
 export default CartSlice.reducer;

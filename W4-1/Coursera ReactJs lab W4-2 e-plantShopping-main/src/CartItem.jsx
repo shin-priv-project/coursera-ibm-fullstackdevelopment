@@ -1,31 +1,35 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import { removeItem, updateQuantity, toggleCart } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
+  const cartToggle = useSelector(state => state.cart.cartToggle);
   const dispatch = useDispatch();
 
   const handleContinueShopping = (e) => {
-   
+    e.preventDefault();
+    dispatch(toggleCart());
   };
 
-const handleCheckoutSHopping = (e) => {
+const handleCheckoutShopping = (e) => {
   alert("Functionality to be adeed for future reference");
 }
 
   const handleIncrement = (item) => {
-    const name = item.name;
+    const plant = item.name;
     const amount = item.quantity + 1;
-    dispatch(updateQuantity(name, amount));
+    dispatch(updateQuantity({plant, amount}));
   };
 
   const handleDecrement = (item) => {
-    const name = item.name;
-    const amount = item.quantity - 1;
-    if (amount > 0) {
-      dispatch(updateQuantity(name, amount));
+    const plant = item.name;
+    // console.log(item.name, item.quantity)
+    if (item.quantity > 0) {
+      console.log("Decrement function invoked.")
+      const amount = item.quantity - 1;
+      dispatch(updateQuantity({plant, amount}));
     } else {
       dispatch(removeItem(item));
     };
@@ -37,13 +41,15 @@ const handleCheckoutSHopping = (e) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
-    const totalAmount = cart.reduce((total, item) => total + item.cost*item.quantity, 0);
+    const totalAmount = cart.reduce((total, item) => total + parseFloat(item.cost.replace('$', ''))*item.quantity, 0);
     return totalAmount;
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    const totalCost = item.cost * item.quantity;
+    const priceFloat = parseFloat(item.cost.replace('$', ''));
+    const totalCost = priceFloat*item.quantity;
+    console.log(item.name, item.cost, item.quantity, totalCost);
     return totalCost;
   };
 
@@ -72,7 +78,7 @@ const handleCheckoutSHopping = (e) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={(e) => handleCheckoutShopping(e)}>Checkout</button>
       </div>
     </div>
   );

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from "./CartSlice";
+import { addItem, toggleCart } from "./CartSlice";
 import './ProductList.css'
 import CartItem from './CartItem';
 
 
 function ProductList() {
-    const [showCart, setShowCart] = useState(false); 
+    // const [showCart, setShowCart] = useState(false); 
+    const showCart = useSelector(state => state.cart.cartToggle);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState([]);
 
@@ -241,19 +242,17 @@ function ProductList() {
     textDecoration: 'none',
    }
    const handleCartClick = (e) => {
-    e.preventDefault();
-    setShowCart(true); // Set showCart to true when cart icon is clicked
-    };
-    const handlePlantsClick = (e) => {
-    e.preventDefault();
-    setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-    setShowCart(false); // Hide the cart when navigating to About Us
-    };
-   const handleContinueShopping = (e) => {
-    e.preventDefault();
-    setShowCart(false);
-    };
-    const handleAddToCart = (item) => {
+        e.preventDefault();
+        // setShowCart(true); // Set showCart to true when cart icon is clicked
+        dispatch(toggleCart()); 
+        };
+   const handlePlantsClick = (e) => {
+        e.preventDefault();
+        // setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
+        dispatch(toggleCart()); // Set showCart to true when cart icon is clicked
+        // setShowCart(false); // Hide the cart when navigating to About Us
+        };
+   const handleAddToCart = (item) => {
         console.log("The function handleAddToCart was provoked.")
         dispatch(addItem(item));
 
@@ -279,7 +278,8 @@ function ProductList() {
             [item.name]: true,
         }));
         // console.log(addedToCart);
-        setShowCart(true);
+        // setShowCart(true);
+        dispatch(toggleCart());
     };
 
     return (
@@ -332,7 +332,7 @@ function ProductList() {
                 ))}
             </div>
         ) : (
-            <CartItem onContinueShopping={handleContinueShopping}/>
+            <CartItem />
         )}
     </div>
     );
